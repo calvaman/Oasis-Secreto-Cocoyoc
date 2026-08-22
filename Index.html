@@ -1,1 +1,760 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#2D4A3E">
+<title>Oasis Secreto Cocoyoc - Guía del Huésped</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+  --bg: #F5F0E6;
+  --primary: #2D4A3E;
+  --primary-light: #3D5A4E;
+  --secondary: #C17A53;
+  --secondary-light: #D48B64;
+  --accent: #3A8B8B;
+  --accent-light: #4A9B9B;
+  --text: #2C2C2C;
+  --text-light: #6B6B6B;
+  --white: #FFFFFF;
+  --card-bg: #FFFFFF;
+  --shadow: 0 4px 20px rgba(45,74,62,0.08);
+  --shadow-lg: 0 8px 30px rgba(45,74,62,0.12);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+.serif { font-family: 'Playfair Display', serif; }
 
+/* Splash */
+.splash {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--bg);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+.splash.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.splash-img {
+  width: 280px; height: 280px; border-radius: 24px;
+  object-fit: cover; box-shadow: var(--shadow-lg);
+  margin-bottom: 24px; animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.splash h1 { font-size: 2.4rem; color: var(--primary); margin-bottom: 8px; }
+.splash p { color: var(--text-light); font-size: 0.95rem; letter-spacing: 2px; text-transform: uppercase; }
+.splash .btn-start {
+  margin-top: 32px; padding: 14px 48px;
+  background: var(--primary); color: var(--white);
+  border: none; border-radius: 50px; font-size: 1rem; font-weight: 500;
+  cursor: pointer; transition: all 0.3s ease; letter-spacing: 1px;
+}
+.splash .btn-start:hover { background: var(--primary-light); transform: translateY(-2px); }
+
+/* App container */
+.app { display: none; min-height: 100vh; padding-bottom: 80px; }
+.app.active { display: block; animation: fadeIn 0.5s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Header */
+.header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(245,240,230,0.92); backdrop-filter: blur(12px);
+  padding: 16px 20px; display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid rgba(45,74,62,0.06);
+}
+.header-title { font-size: 1.1rem; color: var(--primary); font-weight: 600; }
+.header-btn {
+  width: 40px; height: 40px; border-radius: 12px;
+  background: var(--white); border: none; color: var(--primary);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; box-shadow: var(--shadow); font-size: 1rem;
+}
+
+/* Hero */
+.hero {
+  position: relative; padding: 0 20px 24px;
+}
+.hero-img-wrap {
+  position: relative; border-radius: 20px; overflow: hidden;
+  box-shadow: var(--shadow-lg); margin-top: 8px;
+}
+.hero-img {
+  width: 100%; height: 220px; object-fit: cover; display: block;
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(45,74,62,0.7) 0%, transparent 60%);
+}
+.hero-text {
+  position: absolute; bottom: 20px; left: 20px; right: 20px;
+}
+.hero-text h2 { color: var(--white); font-size: 1.6rem; margin-bottom: 4px; }
+.hero-text p { color: rgba(255,255,255,0.85); font-size: 0.85rem; }
+
+/* Section */
+.section { display: none; padding: 0 20px 24px; animation: fadeIn 0.4s ease; }
+.section.active { display: block; }
+.section-title {
+  font-size: 1.5rem; color: var(--primary); margin: 24px 0 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-title i { color: var(--secondary); font-size: 1.1rem; }
+
+/* Cards */
+.card {
+  background: var(--card-bg); border-radius: 16px;
+  padding: 20px; margin-bottom: 12px;
+  box-shadow: var(--shadow); transition: transform 0.2s ease;
+}
+.card:active { transform: scale(0.98); }
+.card h3 { font-size: 1rem; color: var(--primary); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.card h3 i { color: var(--accent); width: 20px; }
+.card p, .card li { font-size: 0.9rem; color: var(--text-light); line-height: 1.6; }
+.card ul { padding-left: 18px; }
+.card li { margin-bottom: 6px; }
+.card strong { color: var(--text); font-weight: 500; }
+
+/* Grid menu */
+.menu-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+  padding: 0 20px;
+}
+.menu-item {
+  background: var(--card-bg); border-radius: 16px; padding: 20px 16px;
+  box-shadow: var(--shadow); cursor: pointer; text-align: center;
+  transition: all 0.25s ease; border: 2px solid transparent;
+}
+.menu-item:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.menu-item:active { transform: scale(0.97); }
+.menu-item i {
+  width: 48px; height: 48px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 10px; font-size: 1.3rem; color: var(--white);
+}
+.menu-item span { font-size: 0.8rem; font-weight: 500; color: var(--text); display: block; }
+
+/* Directions steps */
+.steps { padding: 0; }
+.step {
+  display: flex; gap: 14px; margin-bottom: 16px; position: relative;
+}
+.step::before {
+  content: ''; position: absolute; left: 15px; top: 36px; bottom: -16px;
+  width: 2px; background: var(--accent); opacity: 0.3;
+}
+.step:last-child::before { display: none; }
+.step-num {
+  width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+  background: var(--accent); color: var(--white); font-size: 0.8rem; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+}
+.step-content { padding-top: 4px; }
+.step-content p { font-size: 0.9rem; color: var(--text-light); line-height: 1.5; }
+.step-content strong { color: var(--primary); }
+
+/* Contact buttons */
+.contact-btn {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--card-bg); border-radius: 14px; padding: 14px 16px;
+  margin-bottom: 10px; box-shadow: var(--shadow); text-decoration: none;
+  color: inherit; transition: all 0.2s ease;
+}
+.contact-btn:hover { transform: translateX(4px); }
+.contact-btn i { width: 40px; height: 40px; border-radius: 12px; background: var(--primary); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+.contact-btn div { flex: 1; }
+.contact-btn .name { font-size: 0.9rem; font-weight: 500; color: var(--text); }
+.contact-btn .detail { font-size: 0.8rem; color: var(--text-light); }
+.contact-btn .action { color: var(--accent); font-size: 0.8rem; font-weight: 500; }
+
+/* Tags */
+.tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(58,139,139,0.1); color: var(--accent);
+  padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 500; margin: 2px;
+}
+.tag-warn { background: rgba(193,122,83,0.1); color: var(--secondary); }
+
+/* Bottom nav */
+.bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(45,74,62,0.06);
+  display: flex; justify-content: space-around; padding: 8px 0 12px;
+}
+.nav-item {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  background: none; border: none; color: var(--text-light); font-size: 0.65rem; cursor: pointer;
+  padding: 4px 12px; transition: color 0.2s ease;
+}
+.nav-item i { font-size: 1.2rem; }
+.nav-item.active { color: var(--primary); }
+
+/* Checklist */
+.check-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 0; border-bottom: 1px solid rgba(45,74,62,0.06);
+}
+.check-item:last-child { border-bottom: none; }
+.check-box {
+  width: 22px; height: 22px; border-radius: 6px;
+  border: 2px solid var(--accent); flex-shrink: 0; margin-top: 2px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.2s ease;
+}
+.check-box.checked { background: var(--accent); border-color: var(--accent); }
+.check-box.checked i { color: var(--white); font-size: 0.7rem; }
+.check-text { font-size: 0.9rem; color: var(--text-light); line-height: 1.5; }
+.check-text.done { text-decoration: line-through; opacity: 0.5; }
+
+/* Restaurant card */
+.rest-card {
+  background: var(--card-bg); border-radius: 16px; overflow: hidden;
+  box-shadow: var(--shadow); margin-bottom: 14px;
+}
+.rest-card .rest-body { padding: 16px; }
+.rest-card h4 { font-size: 1rem; color: var(--primary); margin-bottom: 6px; }
+.rest-card .rest-meta { font-size: 0.8rem; color: var(--text-light); margin-bottom: 10px; }
+.rest-card .rest-meta i { color: var(--secondary); margin-right: 4px; }
+.rest-card .rest-note {
+  background: rgba(193,122,83,0.08); border-radius: 10px; padding: 10px 12px;
+  font-size: 0.8rem; color: var(--secondary); margin-bottom: 10px;
+}
+.rest-card .rest-actions { display: flex; gap: 8px; }
+.rest-card .rest-actions a {
+  flex: 1; text-align: center; padding: 10px; border-radius: 10px;
+  font-size: 0.8rem; font-weight: 500; text-decoration: none; transition: all 0.2s ease;
+}
+.rest-card .rest-actions .btn-primary { background: var(--primary); color: var(--white); }
+.rest-card .rest-actions .btn-secondary { background: rgba(45,74,62,0.06); color: var(--primary); }
+
+/* WiFi box */
+.wifi-box {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  border-radius: 20px; padding: 24px; color: var(--white); text-align: center;
+  margin-bottom: 16px;
+}
+.wifi-box i { font-size: 2.5rem; margin-bottom: 12px; opacity: 0.9; }
+.wifi-box .wifi-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.7; margin-bottom: 4px; }
+.wifi-box .wifi-value { font-size: 1.3rem; font-weight: 600; margin-bottom: 16px; }
+.wifi-box .copy-btn {
+  background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+  color: var(--white); padding: 8px 20px; border-radius: 50px;
+  font-size: 0.8rem; cursor: pointer; transition: all 0.2s ease;
+}
+.wifi-box .copy-btn:hover { background: rgba(255,255,255,0.25); }
+
+/* Farewell */
+.farewell {
+  text-align: center; padding: 40px 20px;
+}
+.farewell i { font-size: 3rem; color: var(--secondary); margin-bottom: 16px; }
+.farewell h3 { font-size: 1.4rem; color: var(--primary); margin-bottom: 12px; }
+.farewell p { color: var(--text-light); font-size: 0.95rem; line-height: 1.7; max-width: 320px; margin: 0 auto 20px; }
+.farewell .btn-call {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--secondary); color: var(--white);
+  padding: 14px 32px; border-radius: 50px; text-decoration: none;
+  font-weight: 500; transition: all 0.2s ease;
+}
+.farewell .btn-call:hover { background: var(--secondary-light); }
+
+/* Welcome message */
+.welcome-msg {
+  padding: 0 20px 20px; text-align: center;
+}
+.welcome-msg p { color: var(--text-light); font-size: 0.95rem; line-height: 1.7; }
+.welcome-msg .highlight { color: var(--secondary); font-weight: 500; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 0; }
+
+/* Responsive */
+@media (min-width: 480px) {
+  .app { max-width: 480px; margin: 0 auto; }
+  .bottom-nav { max-width: 480px; left: 50%; transform: translateX(-50%); }
+}
+</style>
+</head>
+<body>
+
+<!-- SPLASH SCREEN -->
+<div class="splash" id="splash">
+  <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&h=600&fit=crop" alt="Oasis Secreto" class="splash-img">
+  <h1 class="serif">Oasis Secreto</h1>
+  <p>Cocoyoc, Morelos</p>
+  <button class="btn-start" onclick="enterApp()">Comenzar</button>
+</div>
+
+<!-- APP -->
+<div class="app" id="app">
+  
+  <!-- HEADER -->
+  <div class="header">
+    <button class="header-btn" onclick="goHome()"><i class="fas fa-arrow-left"></i></button>
+    <span class="header-title" id="headerTitle">Inicio</span>
+    <button class="header-btn" onclick="goHome()"><i class="fas fa-home"></i></button>
+  </div>
+
+  <!-- HOME -->
+  <div class="section active" id="sec-home">
+    <div class="hero">
+      <div class="hero-img-wrap">
+        <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&h=500&fit=crop" alt="Oasis" class="hero-img">
+        <div class="hero-overlay"></div>
+        <div class="hero-text">
+          <h2 class="serif">Tu rincón escondido</h2>
+          <p>Cocoyoc, Morelos</p>
+        </div>
+      </div>
+    </div>
+    <div class="welcome-msg">
+      <p>Bienvenido a tu <span class="highlight">Oasis Secreto</span>. Esta guía interactiva te acompañará durante tu estancia para que disfrutes al máximo de este rincón escondido en Cocoyoc.</p>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-item" onclick="showSection('llegada')">
+        <i class="fas fa-key" style="background:var(--secondary)"></i>
+        <span>Llegada y acceso</span>
+      </div>
+      <div class="menu-item" onclick="showSection('comollegar')">
+        <i class="fas fa-route" style="background:var(--accent)"></i>
+        <span>Cómo llegar</span>
+      </div>
+      <div class="menu-item" onclick="showSection('wifi')">
+        <i class="fas fa-wifi" style="background:var(--primary)"></i>
+        <span>Wi-Fi y confort</span>
+      </div>
+      <div class="menu-item" onclick="showSection('disfruta')">
+        <i class="fas fa-water" style="background:#4A9B9B"></i>
+        <span>Disfruta el Oasis</span>
+      </div>
+      <div class="menu-item" onclick="showSection('convivencia')">
+        <i class="fas fa-handshake" style="background:var(--secondary)"></i>
+        <span>Pacto de convivencia</span>
+      </div>
+      <div class="menu-item" onclick="showSection('salida')">
+        <i class="fas fa-clipboard-check" style="background:var(--accent)"></i>
+        <span>Guía de salida</span>
+      </div>
+      <div class="menu-item" onclick="showSection('emergencias')">
+        <i class="fas fa-first-aid" style="background:#C0392B"></i>
+        <span>Emergencias</span>
+      </div>
+      <div class="menu-item" onclick="showSection('transporte')">
+        <i class="fas fa-taxi" style="background:var(--primary)"></i>
+        <span>Transporte</span>
+      </div>
+      <div class="menu-item" onclick="showSection('sabores')">
+        <i class="fas fa-utensils" style="background:var(--secondary)"></i>
+        <span>Sabores y aventuras</span>
+      </div>
+      <div class="menu-item" onclick="showSection('despedida')">
+        <i class="fas fa-heart" style="background:var(--accent)"></i>
+        <span>Despedida</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- LLEGADA Y ACCESO -->
+  <div class="section" id="sec-llegada">
+    <h2 class="section-title serif"><i class="fas fa-key"></i> Llegada y acceso</h2>
+    <div class="card">
+      <h3><i class="fas fa-user"></i> Recepción con Esteban</h3>
+      <p>La entrega y recepción de la casa se realiza <strong>personalmente con Esteban</strong>. Él te recibirá a tu llegada para entregarte las llaves físicas y explicarte los detalles del lugar. Con tus llaves podrás entrar y salir con total libertad durante tu estadía.</p>
+    </div>
+    <div class="card">
+      <h3><i class="fas fa-car"></i> Estacionamiento</h3>
+      <p>Cuentas con un <strong>amplio jardín frontal</strong> para estacionar cómodamente varios vehículos.</p>
+    </div>
+    <div class="card">
+      <h3><i class="fas fa-door-open"></i> Puertas del garaje</h3>
+      <p>Un detalle importante: las puertas abren en <strong>direcciones opuestas</strong> (una hacia la derecha y otra hacia la izquierda). Tómalo en cuenta al abrirlas para evitar golpes.</p>
+      <div style="margin-top:10px;">
+        <span class="tag tag-warn"><i class="fas fa-lock"></i> Cerrar con llave al salir</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CÓMO LLEGAR -->
+  <div class="section" id="sec-comollegar">
+    <h2 class="section-title serif"><i class="fas fa-route"></i> Cómo llegar</h2>
+    <div class="card steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <p>Toma como referencia el <strong>Hotel Hacienda Cocoyoc</strong> y avanza por la carretera hacia el pueblo.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <p>Pasa los <strong>arcos</strong> que encontrarás en el camino.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <p>Aproximadamente <strong>500 metros</strong> después de los arcos, verás la calle Calderón. En la esquina hay una tienda de materiales eléctricos de fachada color vino llamada <strong>"Eléctrica López"</strong>.</p>
+          <span class="tag tag-warn" style="margin-top:6px;display:inline-flex;"><i class="fas fa-exclamation-triangle"></i> No des vuelta por Calderón</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <p>Avanza <strong>80 metros</strong> más por la carretera. A tu derecha encontrarás el <strong>Restaurante La Palapa Cocoyoc</strong> (identifícalo por sus arbolitos ficus recortados en forma de esfera).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <p>Continúa solo <strong>50 metros</strong> más. Llegarás a un pequeño callejón en cuyo inicio verás tierra a la izquierda, un negocio de vidrios/aluminio a la derecha y una cecinería.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <p><strong>No te detengas.</strong> El callejón parece terminar en un terreno baldío, pero no lo hace. Sigue de frente y verás que el camino gira a la izquierda.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">7</div>
+        <div class="step-content">
+          <p>Continúa por el callejón hasta encontrar el <strong>portón rojo con el número 3</strong> pintado. ¡Has llegado a tu Oasis!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WI-FI Y CONFORT -->
+  <div class="section" id="sec-wifi">
+    <h2 class="section-title serif"><i class="fas fa-wifi"></i> Conectividad y confort</h2>
+    <div class="wifi-box">
+      <i class="fas fa-wifi"></i>
+      <div class="wifi-label">Red Wi-Fi</div>
+      <div class="wifi-value" id="wifiName">MetroBox4548_5G</div>
+      <div class="wifi-label">Contraseña</div>
+      <div class="wifi-value" id="wifiPass">MetroBoxADBF3614</div>
+      <button class="copy-btn" onclick="copyWifi()"><i class="fas fa-copy"></i> Copiar contraseña</button>
+    </div>
+    <div class="card">
+      <h3><i class="fas fa-wind"></i> Ventilación</h3>
+      <p>Para garantizar tu confort, <strong>todas las habitaciones cuentan con ventiladores de techo</strong>. Por las tardes, te recomendamos abrir las ventanas para disfrutar de la brisa natural de Cocoyoc.</p>
+    </div>
+  </div>
+
+  <!-- DISFRUTA EL OASIS -->
+  <div class="section" id="sec-disfruta">
+    <h2 class="section-title serif"><i class="fas fa-water"></i> Disfruta el Oasis</h2>
+    <div class="card">
+      <h3><i class="fas fa-swimming-pool"></i> La alberca</h3>
+      <ul>
+        <li><strong>Profundidad:</strong> 1.40 metros constantes. Ideal para toda la familia.</li>
+        <li><strong>Ducha antes de entrar</strong> para cuidar la calidad del agua.</li>
+        <li><strong>Evita bloqueadores solares</strong> antes de nadar.</li>
+        <li>Los <strong>niños y menores de edad</strong> deben estar siempre acompañados por un adulto.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><i class="fas fa-fire"></i> La parrilla de carbón</h3>
+      <p>La parrilla funciona con <strong>carbón</strong> y cuenta con un práctico lavabo al lado para limpiar y lavarte las manos.</p>
+      <div class="rest-note" style="margin-top:10px;">
+        <i class="fas fa-star"></i> <strong>Regla de oro:</strong> La parrilla tiene sus propios utensilios exclusivos. No utilices los utensilios de la cocina interior en la parrilla, ni los de la parrilla en la cocina.
+      </div>
+      <p>La cocina interior está <strong>totalmente equipada</strong> para que cocines sin problemas.</p>
+    </div>
+  </div>
+
+  <!-- PACTO DE CONVIVENCIA -->
+  <div class="section" id="sec-convivencia">
+    <h2 class="section-title serif"><i class="fas fa-handshake"></i> Pacto de convivencia</h2>
+    <div class="card">
+      <h3><i class="fas fa-smoking-ban"></i> Sin humo en el interior</h3>
+      <p>Fuma únicamente en las <strong>áreas exteriores</strong> de la casa. Gracias por cuidar el aroma y la limpieza del espacio.</p>
+    </div>
+    <div class="card">
+      <h3><i class="fas fa-volume-mute"></i> Tranquilidad y respeto</h3>
+      <p>Evita fiestas o música a alto volumen <strong>después de las 11:00 p.m.</strong> Cocoyoc es para descansar y respetamos a nuestros vecinos.</p>
+    </div>
+    <div class="card">
+      <h3><i class="fas fa-shield-alt"></i> Seguridad</h3>
+      <p>Menores de edad siempre <strong>acompañados de un adulto</strong> en la alberca.</p>
+    </div>
+    <div class="card">
+      <h3><i class="fas fa-paw"></i> Política de mascotas</h3>
+      <ul>
+        <li>Máximo <strong>2 mascotas</strong> de razas pequeñas.</li>
+        <li>Deben estar <strong>entrenadas</strong> y tener comportamiento tranquilo (sin ladridos excesivos).</li>
+        <li>Los dueños asumen la <strong>total responsabilidad</strong> por cualquier daño material (muebles, telas, jardín, etc.).</li>
+        <li>Se realizará el <strong>cargo correspondiente</strong> por daños.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3><i class="fas fa-leaf"></i> Cuida el Oasis</h3>
+      <p>Apaga <strong>luces y ventiladores</strong> cuando no los estés usando para cuidar el medio ambiente.</p>
+    </div>
+  </div>
+
+  <!-- GUÍA DE SALIDA -->
+  <div class="section" id="sec-salida">
+    <h2 class="section-title serif"><i class="fas fa-clipboard-check"></i> Guía de salida</h2>
+    <div class="card" style="text-align:center; margin-bottom:16px;">
+      <span class="tag tag-warn"><i class="fas fa-clock"></i> Horario de salida: 12:00 p.m.</span>
+    </div>
+    <div class="card">
+      <h3><i class="fas fa-list-check"></i> Checklist de salida</h3>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"><i class="fas fa-check"></i></div>
+        <div class="check-text">Apaga luces y ventiladores</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"><i class="fas fa-check"></i></div>
+        <div class="check-text">Deja utensilios lavados o acomodados en el lavaplatos</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"><i class="fas fa-check"></i></div>
+        <div class="check-text">No mezcles utensilios de cocina con los de la parrilla</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"><i class="fas fa-check"></i></div>
+        <div class="check-text">Saca la basura y deposítala en los contenedores grandes (camioneta, caja de carga)</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"><i class="fas fa-check"></i></div>
+        <div class="check-text">Nunca dejes bolsas dentro de la casa</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"><i class="fas fa-check"></i></div>
+        <div class="check-text">Asegura la puerta principal con llave</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"><i class="fas fa-check"></i></div>
+        <div class="check-text">Cierra las puertas del garaje (recuerda que abren en sentidos opuestos)</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"><i class="fas fa-check"></i></div>
+        <div class="check-text">Coordina con Esteban para devolver las llaves en persona</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"><i class="fas fa-check"></i></div>
+        <div class="check-text">Avisa a Esteban que ya saliste</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMERGENCIAS -->
+  <div class="section" id="sec-emergencias">
+    <h2 class="section-title serif"><i class="fas fa-first-aid"></i> Emergencias y salud</h2>
+    <p style="padding:0 20px 16px; color:var(--text-light); font-size:0.9rem;">Guarda estos números en tu celular.</p>
+    <a href="tel:+527353942862" class="contact-btn">
+      <i class="fas fa-fire-extinguisher"></i>
+      <div>
+        <div class="name">Bomberos y Protección Civil (Yautepec)</div>
+        <div class="detail">+52 735 394 2862</div>
+      </div>
+      <span class="action">Llamar <i class="fas fa-phone"></i></span>
+    </a>
+    <a href="tel:+527353920460" class="contact-btn">
+      <i class="fas fa-hospital"></i>
+      <div>
+        <div class="name">Centro de Salud (Yautepec)</div>
+        <div class="detail">Paseo Tlahuica S/N, Rancho Nuevo</div>
+      </div>
+      <span class="action">Llamar <i class="fas fa-phone"></i></span>
+    </a>
+    <a href="tel:+527353541084" class="contact-btn">
+      <i class="fas fa-clinic-medical"></i>
+      <div>
+        <div class="name">Clínica De La Cruz (Privado)</div>
+        <div class="detail">Carretera Federal México-Oaxaca 1519</div>
+      </div>
+      <span class="action">Llamar <i class="fas fa-phone"></i></span>
+    </a>
+    <a href="tel:+527353536073" class="contact-btn">
+      <i class="fas fa-user-md"></i>
+      <div>
+        <div class="name">Centro Médico del Ángel</div>
+        <div class="detail">Atarjea 6, Guadalupe Victoria</div>
+      </div>
+      <span class="action">Llamar <i class="fas fa-phone"></i></span>
+    </a>
+  </div>
+
+  <!-- TRANSPORTE -->
+  <div class="section" id="sec-transporte">
+    <h2 class="section-title serif"><i class="fas fa-taxi"></i> Transporte local</h2>
+    <p style="padding:0 20px 16px; color:var(--text-light); font-size:0.9rem;">Sitios de confianza para moverte por la zona:</p>
+    <a href="tel:+527353561246" class="contact-btn">
+      <i class="fas fa-taxi"></i>
+      <div>
+        <div class="name">Radio Taxi Cocoyoc</div>
+        <div class="detail">El más cercano · Miguel Hidalgo 8, Cocoyoc</div>
+      </div>
+      <span class="action">Llamar <i class="fas fa-phone"></i></span>
+    </a>
+    <a href="tel:+525652786749" class="contact-btn">
+      <i class="fas fa-taxi"></i>
+      <div>
+        <div class="name">Sitio de Taxis Oaxtepec</div>
+        <div class="detail">Av. San Juan 29, Oaxtepec</div>
+      </div>
+      <span class="action">Llamar <i class="fas fa-phone"></i></span>
+    </a>
+    <a href="tel:+527353564611" class="contact-btn">
+      <i class="fas fa-taxi"></i>
+      <div>
+        <div class="name">Sitios Unidos Oaxtepec</div>
+        <div class="detail">Rómulo Hernández S/N, Oaxtepec</div>
+      </div>
+      <span class="action">Llamar <i class="fas fa-phone"></i></span>
+    </a>
+  </div>
+
+  <!-- SABORES Y AVENTURAS -->
+  <div class="section" id="sec-sabores">
+    <h2 class="section-title serif"><i class="fas fa-utensils"></i> Sabores y aventuras</h2>
+    
+    <div class="rest-card">
+      <div class="rest-body">
+        <h4>La Palapa Cocoyoc</h4>
+        <div class="rest-meta"><i class="fas fa-map-marker-alt"></i> Justo enfrente de la casa</div>
+        <p style="font-size:0.9rem; color:var(--text-light); line-height:1.6; margin-bottom:10px;">
+          Nuestro vecino y favorito. No tendrás que manejar para disfrutar de una rica comida tradicional.
+        </p>
+        <div class="rest-note">
+          <i class="fas fa-lightbulb"></i> <strong>Tip de oro:</strong> Pide la comida y pasa a recogerla. Ellos te la preparan para llevar y la disfrutas en la comodidad del Oasis.
+        </div>
+        <div class="rest-meta"><i class="fas fa-clock"></i> 11:00 a.m. a 5:00 p.m. · Cerrado miércoles</div>
+        <div class="rest-meta" style="margin-bottom:10px;"><i class="fas fa-money-bill-wave"></i> Solo efectivo y transferencia bancaria</div>
+        <div class="rest-actions">
+          <a href="tel:+527353561774" class="btn-primary"><i class="fas fa-phone"></i> Llamar</a>
+          <a href="https://maps.google.com/?q=Carretera+Cuautla-Cuernavaca+57+Cocoyoc" class="btn-secondary" target="_blank"><i class="fas fa-map"></i> Ver mapa</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><i class="fas fa-store"></i> Otras recomendaciones</h3>
+      <div style="margin-bottom:12px;">
+        <strong style="color:var(--primary);">Birrierías Pomposo</strong>
+        <p style="font-size:0.85rem;">México 160, Centro, Cocoyoc</p>
+        <a href="tel:+527351704035" style="color:var(--accent); font-size:0.85rem; text-decoration:none;"><i class="fas fa-phone"></i> +52 735 170 4035</a>
+      </div>
+      <div style="margin-bottom:12px;">
+        <strong style="color:var(--primary);">El Hórreo</strong>
+        <p style="font-size:0.85rem;">Oaxtepec</p>
+        <a href="tel:+527355050476" style="color:var(--accent); font-size:0.85rem; text-decoration:none;"><i class="fas fa-phone"></i> +52 735 505 0476</a>
+      </div>
+      <div style="margin-bottom:12px;">
+        <strong style="color:var(--primary);">El Arrocero</strong>
+        <p style="font-size:0.85rem;">Cuautla</p>
+        <a href="tel:+527353986992" style="color:var(--accent); font-size:0.85rem; text-decoration:none;"><i class="fas fa-phone"></i> +52 735 398 6992</a>
+      </div>
+      <div>
+        <strong style="color:var(--primary);">Six Flags Hurricane Harbor Oaxtepec</strong>
+        <p style="font-size:0.85rem;">Autopista México-Cuautla</p>
+        <a href="tel:+527353569900" style="color:var(--accent); font-size:0.85rem; text-decoration:none;"><i class="fas fa-phone"></i> +52 735 356 9900</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESPEDIDA -->
+  <div class="section" id="sec-despedida">
+    <div class="farewell">
+      <i class="fas fa-heart"></i>
+      <h3 class="serif">Gracias por ser nuestro huésped</h3>
+      <p>Esperamos que hayas creado recuerdos inolvidables en este rincón escondido. Nos encantará tenerte de vuelta.</p>
+      <p style="font-size:0.85rem; margin-bottom:20px;">Si durante tu estancia algo no fue perfecto, no dudes en comunicárselo a Esteban para que podamos mejorar.</p>
+      <p style="font-size:1rem; color:var(--primary); font-weight:500; margin-bottom:20px;">¡Hasta la próxima, y cuida el Oasis como si fuera tuyo!</p>
+      <a href="tel:+527353561246" class="btn-call"><i class="fas fa-phone"></i> Llamar a Esteban</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav" id="bottomNav" style="display:none;">
+  <button class="nav-item active" onclick="goHome()">
+    <i class="fas fa-home"></i>
+    <span>Inicio</span>
+  </button>
+  <button class="nav-item" onclick="showSection('emergencias')">
+    <i class="fas fa-first-aid"></i>
+    <span>Urgencias</span>
+  </button>
+  <button class="nav-item" onclick="showSection('sabores')">
+    <i class="fas fa-utensils"></i>
+    <span>Comer</span>
+  </button>
+  <button class="nav-item" onclick="showSection('transporte')">
+    <i class="fas fa-taxi"></i>
+    <span>Taxi</span>
+  </button>
+</div>
+
+<script>
+function enterApp() {
+  document.getElementById('splash').classList.add('hidden');
+  document.getElementById('app').classList.add('active');
+  document.getElementById('bottomNav').style.display = 'flex';
+}
+
+function goHome() {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sec-home').classList.add('active');
+  document.getElementById('headerTitle').textContent = 'Inicio';
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.nav-item')[0].classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  
+  const titles = {
+    llegada: 'Llegada y acceso',
+    comollegar: 'Cómo llegar',
+    wifi: 'Wi-Fi y confort',
+    disfruta: 'Disfruta el Oasis',
+    convivencia: 'Pacto de convivencia',
+    salida: 'Guía de salida',
+    emergencias: 'Emergencias',
+    transporte: 'Transporte',
+    sabores: 'Sabores y aventuras',
+    despedida: 'Despedida'
+  };
+  document.getElementById('headerTitle').textContent = titles[id] || 'Inicio';
+  window.scrollTo(0,0);
+}
+
+function toggleCheck(el) {
+  const box = el.querySelector('.check-box');
+  const text = el.querySelector('.check-text');
+  box.classList.toggle('checked');
+  text.classList.toggle('done');
+}
+
+function copyWifi() {
+  const pass = document.getElementById('wifiPass').textContent;
+  navigator.clipboard.writeText(pass).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    const orig = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-check"></i> Copiado';
+    setTimeout(() => btn.innerHTML = orig, 2000);
+  });
+}
+</script>
+
+</body>
+</html>
