@@ -174,6 +174,16 @@ body {
 }
 .step-imgs .step-img { margin-bottom: 0; }
 
+/* Image menu with transparent hotspots */
+.menu-wrap { position: relative; }
+.menu-img { width: 100%; display: block; }
+.menu-hotspot {
+  position: absolute; background: transparent; border: none;
+  cursor: pointer; border-radius: 12px; padding: 0;
+  transition: background 0.2s ease;
+}
+.menu-hotspot:hover { background: rgba(45,74,62,0.07); }
+
 /* Contact buttons */
 .contact-btn {
   display: flex; align-items: center; gap: 12px;
@@ -319,60 +329,55 @@ body {
 
   <!-- HOME -->
   <div class="section active" id="sec-home">
-    <div class="hero">
-      <div class="hero-img-wrap">
-        <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&h=500&fit=crop" alt="Oasis" class="hero-img">
-        <div class="hero-overlay"></div>
-        <div class="hero-text">
-          <h2 class="serif">Tu rincón escondido</h2>
-          <p>Cocoyoc, Morelos</p>
-        </div>
-      </div>
+    <div class="menu-wrap">
+      <img src="images/Menu.PNG" alt="Guía completa del huésped" class="menu-img">
+
+      <!-- Barra superior -->
+      <button class="menu-hotspot" style="top:1%;left:62%;width:15%;height:4.5%;" onclick="showSection('emergencias')" aria-label="Teléfonos útiles"></button>
+      <button class="menu-hotspot" style="top:1%;left:78%;width:12%;height:4.5%;" onclick="showSection('comollegar')" aria-label="Cómo llegar"></button>
+      <a class="menu-hotspot" style="top:1%;left:90.5%;width:9.5%;height:4.5%;" href="https://wa.me/527353561246" target="_blank" aria-label="WhatsApp"></a>
+
+      <!-- Fila 1 -->
+      <button class="menu-hotspot" style="top:73.5%;left:3.5%;width:15.5%;height:14%;" onclick="showSection('bienvenida')" aria-label="Bienvenida"></button>
+      <button class="menu-hotspot" style="top:73.5%;left:19.5%;width:15.5%;height:14%;" onclick="showSection('llegada')" aria-label="Llegada y acceso"></button>
+      <button class="menu-hotspot" style="top:73.5%;left:35.5%;width:15.5%;height:14%;" onclick="showSection('comollegar')" aria-label="Cómo llegar"></button>
+      <button class="menu-hotspot" style="top:73.5%;left:51.5%;width:15.5%;height:14%;" onclick="showSection('wifi')" aria-label="Conectividad y confort"></button>
+      <button class="menu-hotspot" style="top:73.5%;left:67.5%;width:15.5%;height:14%;" onclick="showSection('disfruta')" aria-label="Disfruta el Oasis"></button>
+      <button class="menu-hotspot" style="top:73.5%;left:83.3%;width:15.2%;height:14%;" onclick="showSection('convivencia')" aria-label="Pacto de convivencia"></button>
+
+      <!-- Fila 2 -->
+      <button class="menu-hotspot" style="top:87.8%;left:3.5%;width:15.5%;height:12%;" onclick="showSection('salida')" aria-label="Guía de salida"></button>
+      <button class="menu-hotspot" style="top:87.8%;left:19.5%;width:15.5%;height:12%;" onclick="showSection('emergencias')" aria-label="Emergencias y salud"></button>
+      <button class="menu-hotspot" style="top:87.8%;left:35.5%;width:15.5%;height:12%;" onclick="showSection('transporte')" aria-label="Transporte local"></button>
+      <button class="menu-hotspot" style="top:87.8%;left:51.5%;width:15.5%;height:12%;" onclick="showSection('sabores')" aria-label="Sabores y aventuras"></button>
+      <button class="menu-hotspot" style="top:87.8%;left:67.5%;width:15.5%;height:12%;" onclick="showSection('despedida')" aria-label="Despedida y agradecimiento"></button>
+      <button class="menu-hotspot" style="top:87.8%;left:83.3%;width:15.2%;height:12%;" onclick="showSection('galeria')" aria-label="Galería del Oasis"></button>
     </div>
-    <div class="welcome-msg">
-      <p>Bienvenido a tu <span class="highlight">Oasis Secreto</span>. Esta guía interactiva te acompañará durante tu estancia para que disfrutes al máximo de este rincón escondido en Cocoyoc.</p>
+  </div>
+
+  <!-- BIENVENIDA -->
+  <div class="section" id="sec-bienvenida">
+    <h2 class="section-title serif"><i class="fas fa-door-open"></i> Bienvenida</h2>
+    <div class="card">
+      <p style="font-size:1rem; color:var(--text); line-height:1.8;">Hay lugares que se visitan… y lugares que se sienten. <strong>Oasis Secreto es de los segundos.</strong></p>
+      <p style="margin-top:10px; font-size:0.95rem; line-height:1.8;">Este rincón escondido de Cocoyoc nació de un sueño: un lugar donde las mañanas huelan a jardín, donde el único reloj sea el canto de los pájaros y donde la alberca invite a quedarse un rato más.</p>
+      <p style="margin-top:10px; font-size:0.95rem; line-height:1.8;">Cada espacio fue preparado con cariño para que no solo te alojes aquí, sino que <strong>descanses de verdad</strong>: desconéctate del ruido, reconéctate con quienes vienen contigo y deja que Cocoyoc haga su magia.</p>
     </div>
-    <div class="menu-grid">
-      <div class="menu-item" onclick="showSection('llegada')">
-        <i class="fas fa-key" style="background:var(--secondary)"></i>
-        <span>Llegada y acceso</span>
-      </div>
-      <div class="menu-item" onclick="showSection('comollegar')">
-        <i class="fas fa-route" style="background:var(--accent)"></i>
-        <span>Cómo llegar</span>
-      </div>
-      <div class="menu-item" onclick="showSection('wifi')">
-        <i class="fas fa-wifi" style="background:var(--primary)"></i>
-        <span>Wi-Fi y confort</span>
-      </div>
-      <div class="menu-item" onclick="showSection('disfruta')">
-        <i class="fas fa-water" style="background:#4A9B9B"></i>
-        <span>Disfruta el Oasis</span>
-      </div>
-      <div class="menu-item" onclick="showSection('convivencia')">
-        <i class="fas fa-handshake" style="background:var(--secondary)"></i>
-        <span>Pacto de convivencia</span>
-      </div>
-      <div class="menu-item" onclick="showSection('salida')">
-        <i class="fas fa-clipboard-check" style="background:var(--accent)"></i>
-        <span>Guía de salida</span>
-      </div>
-      <div class="menu-item" onclick="showSection('emergencias')">
-        <i class="fas fa-first-aid" style="background:#C0392B"></i>
-        <span>Emergencias</span>
-      </div>
-      <div class="menu-item" onclick="showSection('transporte')">
-        <i class="fas fa-taxi" style="background:var(--primary)"></i>
-        <span>Transporte</span>
-      </div>
-      <div class="menu-item" onclick="showSection('sabores')">
-        <i class="fas fa-utensils" style="background:var(--secondary)"></i>
-        <span>Sabores y aventuras</span>
-      </div>
-      <div class="menu-item" onclick="showSection('despedida')">
-        <i class="fas fa-heart" style="background:var(--accent)"></i>
-        <span>Despedida</span>
-      </div>
+    <div class="card">
+      <h3><i class="fas fa-bell-slash"></i> Desconéctate</h3>
+      <p>Silencia las notificaciones, respira hondo y deja que el tiempo se mueva a otro ritmo.</p>
+    </div>
+    <div class="card">
+      <h3><i class="fas fa-water"></i> Disfruta</h3>
+      <p>Un chapuzón en la alberca, una carne asada en la parrilla, una siesta en la hamaca… aquí los planes más simples son los mejores.</p>
+    </div>
+    <div class="card">
+      <h3><i class="fas fa-moon"></i> Descansa</h3>
+      <p>Las noches de Cocoyoc son para mirar las estrellas y dormir con la brisa. Mañana no hay prisa.</p>
+    </div>
+    <div class="card">
+      <p style="font-size:0.95rem; line-height:1.8;">Durante tu estancia, esta guía será tu compañera: aquí encontrarás todo lo que necesitas para llegar, disfrutar y partir sin contratiempos. Y si algo necesitas, <strong>Esteban está a una llamada de distancia</strong>.</p>
+      <p style="margin-top:10px; font-size:1rem; color:var(--secondary); font-weight:500;">Bienvenido a tu Oasis. Bienvenido a tu rincón escondido.</p>
     </div>
   </div>
 
@@ -739,6 +744,17 @@ body {
     </div>
   </div>
 
+  <!-- GALERÍA -->
+  <div class="section" id="sec-galeria">
+    <h2 class="section-title serif"><i class="fas fa-camera"></i> Galería del Oasis</h2>
+    <div class="card" style="text-align:center; padding:40px 24px;">
+      <i class="fas fa-camera-retro" style="font-size:3rem; color:var(--secondary); margin-bottom:16px;"></i>
+      <h3 class="serif" style="font-size:1.4rem; color:var(--primary); margin-bottom:12px;">Próximamente</h3>
+      <p style="color:var(--text-light); font-size:0.95rem; line-height:1.7;">Estamos preparando una galería con fotografías profesionales del Oasis para que conozcas cada rincón antes de tu visita.</p>
+      <p style="margin-top:12px; color:var(--secondary); font-size:0.9rem; font-weight:500;">¡Muy pronto podrás verla aquí!</p>
+    </div>
+  </div>
+
 </div>
 
 <!-- BOTTOM NAV -->
@@ -782,6 +798,8 @@ function showSection(id) {
   document.getElementById('sec-' + id).classList.add('active');
   
   const titles = {
+    bienvenida: 'Bienvenida',
+    galeria: 'Galería del Oasis',
     llegada: 'Llegada y acceso',
     comollegar: 'Cómo llegar',
     wifi: 'Wi-Fi y confort',
