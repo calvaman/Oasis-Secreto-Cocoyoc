@@ -164,6 +164,16 @@ body {
 .step-content p { font-size: 0.9rem; color: var(--text-light); line-height: 1.5; }
 .step-content strong { color: var(--primary); }
 
+/* Step photos */
+.step-img {
+  width: 100%; border-radius: 12px; display: block;
+  box-shadow: var(--shadow); margin-bottom: 10px; object-fit: cover;
+}
+.step-imgs {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px;
+}
+.step-imgs .step-img { margin-bottom: 0; }
+
 /* Contact buttons */
 .contact-btn {
   display: flex; align-items: center; gap: 12px;
@@ -393,44 +403,60 @@ body {
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-content">
+          <img src="images/Comollegar1.jpeg" alt="Paso 1" class="step-img">
           <p>Toma como referencia el <strong>Hotel Hacienda Cocoyoc</strong> y avanza por la carretera hacia Cuautla.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-content">
+          <img src="images/Comollegar2.jpeg" alt="Paso 2" class="step-img">
           <p>Pasa los <strong>arcos</strong> que encontrarás en el camino.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-content">
-          <p>Aproximadamente <strong>500 metros</strong> después de los arcos, verás la calle Calderón. En la esquina hay una tienda de materiales eléctricos de fachada color vino llamada <strong>"Eléctrica López"</strong>.</p>
-          <span class="tag tag-warn" style="margin-top:6px;display:inline-flex;"><i class="fas fa-exclamation-triangle"></i> No des vuelta por Calderón</span>
+          <img src="images/Comollegar3.jpeg" alt="Paso 3" class="step-img">
+          <p>Aproximadamente a <strong>600 metros</strong> después de los arcos, verás una <strong>gasolinera que está a punto de abrir</strong>. ¡Es muy identificable!</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">4</div>
         <div class="step-content">
-          <p>Avanza <strong>80 metros</strong> más por la carretera. A tu derecha encontrarás el <strong>Restaurante La Palapa Cocoyoc</strong> (identifícalo por sus arbolitos ficus recortados en forma de cubo).</p>
+          <img src="images/Comollegar4.jpeg" alt="Paso 4" class="step-img">
+          <p><strong>Inmediatamente después de la gasolinera</strong>, en ese mismo sentido encontrarás el <strong>Restaurante La Palapa Cocoyoc</strong> (identifícalo por sus arbolitos ficus recortados en forma de cubo).</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">5</div>
         <div class="step-content">
+          <div class="step-imgs">
+            <img src="images/Comollegar5A.jpeg" alt="Paso 5A" class="step-img">
+            <img src="images/Comollegar5B.jpeg" alt="Paso 5B" class="step-img">
+          </div>
           <p>Continúa solo <strong>50 metros</strong> más. Llegarás a un pequeño callejón en cuyo inicio verás un montículo de tierra a la derecha, un negocio de vidrios/aluminio a la izquierda.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">6</div>
         <div class="step-content">
+          <img src="images/Comollegar6.jpeg" alt="Paso 6" class="step-img">
           <p><strong>No te detengas.</strong> El callejón parece terminar en un terreno baldío, pero no lo hace. Sigue de frente y verás que el camino gira a la derecha.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">7</div>
         <div class="step-content">
-          <p>Continúa por el callejón hasta encontrar el <strong>portón rojo con el número 3</strong> pintado. ¡Has llegado a tu Oasis!</p>
+          <img src="images/Comollegar7.jpeg" alt="Paso 7" class="step-img">
+          <p>Continúa por el callejón hasta encontrar <strong>dos portones</strong>: uno amarillo al fondo y otro <strong>rojo con el número 3</strong> pintado.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">8</div>
+        <div class="step-content">
+          <img src="images/Comollegar8.jpeg" alt="Paso 8" class="step-img">
+          <p><strong>¡Has llegado a tu Oasis!</strong></p>
         </div>
       </div>
     </div>
