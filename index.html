@@ -82,21 +82,6 @@ body {
   cursor: pointer; box-shadow: var(--shadow); font-size: 1rem;
 }
 
-/* Hero */
-.hero { position: relative; padding: 0 20px 24px; }
-.hero-img-wrap {
-  position: relative; border-radius: 20px; overflow: hidden;
-  box-shadow: var(--shadow-lg); margin-top: 8px;
-}
-.hero-img { width: 100%; height: 220px; object-fit: cover; display: block; }
-.hero-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(45,74,62,0.7) 0%, transparent 60%);
-}
-.hero-text { position: absolute; bottom: 20px; left: 20px; right: 20px; }
-.hero-text h2 { color: var(--white); font-size: 1.6rem; margin-bottom: 4px; }
-.hero-text p { color: rgba(255,255,255,0.85); font-size: 0.85rem; }
-
 /* Section */
 .section { display: none; padding: 0 20px 24px; animation: fadeIn 0.4s ease; }
 .section.active { display: block; }
@@ -119,25 +104,6 @@ body {
 .card ul { padding-left: 18px; }
 .card li { margin-bottom: 6px; }
 .card strong { color: var(--text); font-weight: 500; }
-
-/* Grid menu */
-.menu-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
-  padding: 0 20px;
-}
-.menu-item {
-  background: var(--card-bg); border-radius: 16px; padding: 20px 16px;
-  box-shadow: var(--shadow); cursor: pointer; text-align: center;
-  transition: all 0.25s ease; border: 2px solid transparent;
-}
-.menu-item:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
-.menu-item:active { transform: scale(0.97); }
-.menu-item i {
-  width: 48px; height: 48px; border-radius: 14px;
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 10px; font-size: 1.3rem; color: var(--white);
-}
-.menu-item span { font-size: 0.8rem; font-weight: 500; color: var(--text); display: block; }
 
 /* Directions steps */
 .steps { padding: 0; }
@@ -173,6 +139,11 @@ body {
   position: absolute; background: transparent; border: none;
   cursor: pointer; border-radius: 12px; padding: 0;
   transition: background 0.2s ease;
+  text-indent: -9999px;   /* NUEVO: evita que el aria-label aparezca como texto */
+  overflow: hidden;        /* NUEVO */
+  font-size: 0;            /* NUEVO */
+  color: transparent;      /* NUEVO */
+  white-space: nowrap;     /* NUEVO */
 }
 .menu-hotspot:hover { background: rgba(45,74,62,0.07); }
 
@@ -280,11 +251,6 @@ body {
 }
 .farewell .btn-call:hover { background: var(--secondary-light); }
 
-/* Welcome message */
-.welcome-msg { padding: 0 20px 20px; text-align: center; }
-.welcome-msg p { color: var(--text-light); font-size: 0.95rem; line-height: 1.7; }
-.welcome-msg .highlight { color: var(--secondary); font-weight: 500; }
-
 /* ============================================
    Botón flotante de WhatsApp
    ============================================ */
@@ -313,7 +279,7 @@ body {
   50%      { box-shadow: 0 6px 28px rgba(37,211,102,0.75); }
 }
 
-/* Responsive: mismo ancho que la app en desktop */
+/* Responsive */
 @media (min-width: 480px) {
   .app { max-width: 480px; margin: 0 auto; }
   .bottom-nav { max-width: 480px; left: 50%; transform: translateX(-50%); }
@@ -340,6 +306,16 @@ body {
   border: 0;
   display: block;
 }
+.map-title {
+  font-size: 1.15rem;
+  color: var(--primary);
+  margin: 24px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+.map-title i { color: var(--secondary); font-size: 1rem; }
 .map-note {
   font-size: 0.8rem;
   color: var(--text-light);
@@ -386,7 +362,7 @@ body {
   <button class="btn-start" onclick="enterApp()">Comenzar</button>
 </div>
 
-<!-- BOTÓN FLOTANTE WHATSAPP (se muestra al entrar a la app) -->
+<!-- BOTÓN FLOTANTE WHATSAPP -->
 <a href="https://wa.me/525525196575?text=Hola%20Esteban%2C%20estoy%20en%20el%20Oasis%20Secreto%20y%20necesito%20ayuda"
    target="_blank"
    class="float-wa"
@@ -492,32 +468,7 @@ body {
   <div class="section" id="sec-comollegar">
     <h2 class="section-title serif"><i class="fas fa-route"></i> Cómo llegar</h2>
     
-    <!-- ============ MAPA PERSONALIZADO (My Maps) ============ -->
-    <div class="map-wrap">
-      <iframe
-        src="https://www.google.com/maps/d/embed?mid=1DRk80H6_Epa6oyYp6uGj9rgNSMdXDkI&ehbc=2E312F"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
-    </div>
-    <p class="map-note">
-      <i class="fas fa-info-circle"></i> Este mapa muestra el callejón exacto hasta la entrada del Oasis.
-    </p>
-    <div class="map-actions">
-      <a href="https://www.google.com/maps/d/viewer?mid=1DRk80H6_Epa6oyYp6uGj9rgNSMdXDkI"
-         target="_blank"
-         class="btn-maps">
-        <i class="fas fa-map-marked-alt"></i> Abrir en Maps
-      </a>
-      <a href="https://wa.me/?text=Ubicaci%C3%B3n%20Oasis%20Secreto%20Cocoyoc%3A%20https%3A%2F%2Fwww.google.com%2Fmaps%2Fd%2Fviewer%3Fmid%3D1DRk80H6_Epa6oyYp6uGj9rgNSMdXDkI"
-         target="_blank"
-         class="btn-share">
-        <i class="fab fa-whatsapp"></i> Compartir
-      </a>
-    </div>
-    <!-- ============ FIN MAPA ============ -->
-
+    <!-- Pasos con fotos -->
     <div class="card steps">
       <div class="step">
         <div class="step-num">1</div>
@@ -579,6 +530,33 @@ body {
         </div>
       </div>
     </div>
+
+    <!-- ============ MAPA AL FINAL ============ -->
+    <h3 class="map-title serif"><i class="fas fa-map-marked-alt"></i> Mapa del callejón</h3>
+    <div class="map-wrap">
+      <iframe
+        src="https://www.google.com/maps/d/embed?mid=1DRk80H6_Epa6oyYp6uGj9rgNSMdXDkI&ehbc=2E312F"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+    <p class="map-note">
+      <i class="fas fa-info-circle"></i> Este mapa muestra el callejón exacto hasta la entrada del Oasis.
+    </p>
+    <div class="map-actions">
+      <a href="https://www.google.com/maps/d/viewer?mid=1DRk80H6_Epa6oyYp6uGj9rgNSMdXDkI"
+         target="_blank"
+         class="btn-maps">
+        <i class="fas fa-map-marked-alt"></i> Abrir en Maps
+      </a>
+      <a href="https://wa.me/?text=Ubicaci%C3%B3n%20Oasis%20Secreto%20Cocoyoc%3A%20https%3A%2F%2Fwww.google.com%2Fmaps%2Fd%2Fviewer%3Fmid%3D1DRk80H6_Epa6oyYp6uGj9rgNSMdXDkI"
+         target="_blank"
+         class="btn-share">
+        <i class="fab fa-whatsapp"></i> Compartir
+      </a>
+    </div>
+    <!-- ============ FIN MAPA ============ -->
   </div>
 
   <!-- WI-FI Y CONFORT -->
@@ -731,10 +709,9 @@ body {
   </div>
 
   <!-- EMERGENCIAS -->
-  <div class>
-="section" id="sec-emerg   encias">
-    <h2 class="section-title < serif"><i class="fas fa-firsta-aid"></i> Emergencias href y salud</h2>
-    <p style="="padding:0 20px 16px; color:var(--text-light); font-size:0.9rem;">Guarda estos números en tu celular.</p>
+  <div class="section" id="sec-emergencias">
+    <h2 class="section-title serif"><i class="fas fa-first-aid"></i> Emergencias y salud</h2>
+    <p style="padding:0 20px 16px; color:var(--text-light); font-size:0.9rem;">Guarda estos números en tu celular.</p>
     <a href="tel:+527353942862" class="contact-btn">
       <i class="fas fa-fire-extinguisher"></i>
       <div>
@@ -780,7 +757,8 @@ body {
         <div class="detail">El más cercano · Miguel Hidalgo 8, Cocoyoc</div>
       </div>
       <span class="action">Llamar <i class="fas fa-phone"></i></span>
-    </atel:+525652786749" class="contact-btn">
+    </a>
+    <a href="tel:+525652786749" class="contact-btn">
       <i class="fas fa-taxi"></i>
       <div>
         <div class="name">Sitio de Taxis Oaxtepec</div>
@@ -836,7 +814,7 @@ body {
       <div style="margin-bottom:12px;">
         <strong style="color:var(--primary);">El Arrocero</strong>
         <p style="font-size:0.85rem;">Cuautla</p>
-        <a href="tel:+527353986992" style="color:var(--accent); font-size:0.85rem; text-decoration:none;"><i class="fas fa-phone"></i> +52 735 398 6992</a>
+        <a href="tel:+527ajo353986992" style=" delcolor:var(--accent); font-size:0. mapa85rem; text-decoration:none;"><i class que="fas fa-phone"></i> +52 735 398 6992</a>
       </div>
       <div>
         <strong style="color:var(--primary);">Six Flags Hurricane Harbor Oaxtepec</strong>
@@ -928,7 +906,6 @@ function showSection(id) {
   };
   document.getElementById('headerTitle').textContent = titles[id] || 'Inicio';
 
-  // Resaltar el nav inferior correcto
   const navMap = { emergencias: 1, sabores: 2, transporte: 3 };
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   if (navMap[id] !== undefined) {
@@ -956,9 +933,7 @@ function saveChecklist() {
   const states = items.map(i => i.querySelector('.check-box').classList.contains('checked'));
   try {
     localStorage.setItem('oasis-checklist-salida', JSON.stringify(states));
-  } catch (e) {
-    // Silencioso: algunos navegadores en modo privado bloquean localStorage
-  }
+  } catch (e) {}
 }
 
 function loadChecklist() {
@@ -977,7 +952,6 @@ function loadChecklist() {
   });
 }
 
-/* Al cargar la página, restaurar el checklist */
 document.addEventListener('DOMContentLoaded', loadChecklist);
 
 /* ============================================
