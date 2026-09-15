@@ -83,23 +83,17 @@ body {
 }
 
 /* Hero */
-.hero {
-  position: relative; padding: 0 20px 24px;
-}
+.hero { position: relative; padding: 0 20px 24px; }
 .hero-img-wrap {
   position: relative; border-radius: 20px; overflow: hidden;
   box-shadow: var(--shadow-lg); margin-top: 8px;
 }
-.hero-img {
-  width: 100%; height: 220px; object-fit: cover; display: block;
-}
+.hero-img { width: 100%; height: 220px; object-fit: cover; display: block; }
 .hero-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(to top, rgba(45,74,62,0.7) 0%, transparent 60%);
 }
-.hero-text {
-  position: absolute; bottom: 20px; left: 20px; right: 20px;
-}
+.hero-text { position: absolute; bottom: 20px; left: 20px; right: 20px; }
 .hero-text h2 { color: var(--white); font-size: 1.6rem; margin-bottom: 4px; }
 .hero-text p { color: rgba(255,255,255,0.85); font-size: 0.85rem; }
 
@@ -147,9 +141,7 @@ body {
 
 /* Directions steps */
 .steps { padding: 0; }
-.step {
-  display: flex; gap: 14px; margin-bottom: 16px; position: relative;
-}
+.step { display: flex; gap: 14px; margin-bottom: 16px; position: relative; }
 .step::before {
   content: ''; position: absolute; left: 15px; top: 36px; bottom: -16px;
   width: 2px; background: var(--accent); opacity: 0.3;
@@ -276,9 +268,7 @@ body {
 .wifi-box .copy-btn:hover { background: rgba(255,255,255,0.25); }
 
 /* Farewell */
-.farewell {
-  text-align: center; padding: 40px 20px;
-}
+.farewell { text-align: center; padding: 40px 20px; }
 .farewell i { font-size: 3rem; color: var(--secondary); margin-bottom: 16px; }
 .farewell h3 { font-size: 1.4rem; color: var(--primary); margin-bottom: 12px; }
 .farewell p { color: var(--text-light); font-size: 0.95rem; line-height: 1.7; max-width: 320px; margin: 0 auto 20px; }
@@ -291,19 +281,98 @@ body {
 .farewell .btn-call:hover { background: var(--secondary-light); }
 
 /* Welcome message */
-.welcome-msg {
-  padding: 0 20px 20px; text-align: center;
-}
+.welcome-msg { padding: 0 20px 20px; text-align: center; }
 .welcome-msg p { color: var(--text-light); font-size: 0.95rem; line-height: 1.7; }
 .welcome-msg .highlight { color: var(--secondary); font-weight: 500; }
+
+/* ============================================
+   Botón flotante de WhatsApp
+   ============================================ */
+.float-wa {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  z-index: 99;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25D366;
+  color: #FFFFFF;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(37,211,102,0.45);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: waPulse 2.5s ease-in-out infinite;
+}
+.float-wa:active { transform: scale(0.9); }
+@keyframes waPulse {
+  0%, 100% { box-shadow: 0 6px 20px rgba(37,211,102,0.45); }
+  50%      { box-shadow: 0 6px 28px rgba(37,211,102,0.75); }
+}
+
+/* Responsive: mismo ancho que la app en desktop */
+@media (min-width: 480px) {
+  .app { max-width: 480px; margin: 0 auto; }
+  .bottom-nav { max-width: 480px; left: 50%; transform: translateX(-50%); }
+  .float-wa { right: calc(50% - 240px + 20px); }
+}
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 0; }
 
-/* Responsive */
-@media (min-width: 480px) {
-  .app { max-width: 480px; margin: 0 auto; }
-  .bottom-nav { max-width: 480px; left: 50%; transform: translateX(-50%); }
+/* ============================================
+   Mapa embebido (My Maps personalizado)
+   ============================================ */
+.map-wrap {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-bottom: 12px;
+  position: relative;
+  background: #EDE7DA;
+}
+.map-wrap iframe {
+  width: 100%;
+  height: 320px;
+  border: 0;
+  display: block;
+}
+.map-note {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  text-align: center;
+  margin-bottom: 12px;
+  font-style: italic;
+}
+.map-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.map-actions a {
+  flex: 1;
+  text-align: center;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+.map-actions .btn-maps {
+  background: var(--primary);
+  color: var(--white);
+}
+.map-actions .btn-share {
+  background: #25D366;
+  color: var(--white);
 }
 </style>
 </head>
@@ -316,6 +385,16 @@ body {
   <p>Cocoyoc, Morelos</p>
   <button class="btn-start" onclick="enterApp()">Comenzar</button>
 </div>
+
+<!-- BOTÓN FLOTANTE WHATSAPP (se muestra al entrar a la app) -->
+<a href="https://wa.me/525525196575?text=Hola%20Esteban%2C%20estoy%20en%20el%20Oasis%20Secreto%20y%20necesito%20ayuda"
+   target="_blank"
+   class="float-wa"
+   id="floatWa"
+   aria-label="Escribir por WhatsApp a Esteban"
+   style="display:none;">
+  <i class="fab fa-whatsapp"></i>
+</a>
 
 <!-- APP -->
 <div class="app" id="app">
@@ -412,6 +491,33 @@ body {
   <!-- CÓMO LLEGAR -->
   <div class="section" id="sec-comollegar">
     <h2 class="section-title serif"><i class="fas fa-route"></i> Cómo llegar</h2>
+    
+    <!-- ============ MAPA PERSONALIZADO (My Maps) ============ -->
+    <div class="map-wrap">
+      <iframe
+        src="https://www.google.com/maps/d/embed?mid=1DRk80H6_Epa6oyYp6uGj9rgNSMdXDkI&ehbc=2E312F"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+    <p class="map-note">
+      <i class="fas fa-info-circle"></i> Este mapa muestra el callejón exacto hasta la entrada del Oasis.
+    </p>
+    <div class="map-actions">
+      <a href="https://www.google.com/maps/d/viewer?mid=1DRk80H6_Epa6oyYp6uGj9rgNSMdXDkI"
+         target="_blank"
+         class="btn-maps">
+        <i class="fas fa-map-marked-alt"></i> Abrir en Maps
+      </a>
+      <a href="https://wa.me/?text=Ubicaci%C3%B3n%20Oasis%20Secreto%20Cocoyoc%3A%20https%3A%2F%2Fwww.google.com%2Fmaps%2Fd%2Fviewer%3Fmid%3D1DRk80H6_Epa6oyYp6uGj9rgNSMdXDkI"
+         target="_blank"
+         class="btn-share">
+        <i class="fab fa-whatsapp"></i> Compartir
+      </a>
+    </div>
+    <!-- ============ FIN MAPA ============ -->
+
     <div class="card steps">
       <div class="step">
         <div class="step-num">1</div>
@@ -625,9 +731,10 @@ body {
   </div>
 
   <!-- EMERGENCIAS -->
-  <div class="section" id="sec-emergencias">
-    <h2 class="section-title serif"><i class="fas fa-first-aid"></i> Emergencias y salud</h2>
-    <p style="padding:0 20px 16px; color:var(--text-light); font-size:0.9rem;">Guarda estos números en tu celular.</p>
+  <div class>
+="section" id="sec-emerg   encias">
+    <h2 class="section-title < serif"><i class="fas fa-firsta-aid"></i> Emergencias href y salud</h2>
+    <p style="="padding:0 20px 16px; color:var(--text-light); font-size:0.9rem;">Guarda estos números en tu celular.</p>
     <a href="tel:+527353942862" class="contact-btn">
       <i class="fas fa-fire-extinguisher"></i>
       <div>
@@ -673,8 +780,7 @@ body {
         <div class="detail">El más cercano · Miguel Hidalgo 8, Cocoyoc</div>
       </div>
       <span class="action">Llamar <i class="fas fa-phone"></i></span>
-    </a>
-    <a href="tel:+525652786749" class="contact-btn">
+    </atel:+525652786749" class="contact-btn">
       <i class="fas fa-taxi"></i>
       <div>
         <div class="name">Sitio de Taxis Oaxtepec</div>
@@ -790,6 +896,7 @@ function enterApp() {
   document.getElementById('splash').classList.add('hidden');
   document.getElementById('app').classList.add('active');
   document.getElementById('bottomNav').style.display = 'flex';
+  document.getElementById('floatWa').style.display = 'flex';
 }
 
 function goHome() {
@@ -798,7 +905,7 @@ function goHome() {
   document.getElementById('headerTitle').textContent = 'Inicio';
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.querySelectorAll('.nav-item')[0].classList.add('active');
-  window.scrollTo(0,0);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function showSection(id) {
@@ -820,16 +927,62 @@ function showSection(id) {
     despedida: 'Despedida'
   };
   document.getElementById('headerTitle').textContent = titles[id] || 'Inicio';
-  window.scrollTo(0,0);
+
+  // Resaltar el nav inferior correcto
+  const navMap = { emergencias: 1, sabores: 2, transporte: 3 };
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  if (navMap[id] !== undefined) {
+    document.querySelectorAll('.nav-item')[navMap[id]].classList.add('active');
+  } else {
+    document.querySelectorAll('.nav-item')[0].classList.add('active');
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+/* ============================================
+   CHECKLIST CON PERSISTENCIA (localStorage)
+   ============================================ */
 function toggleCheck(el) {
   const box = el.querySelector('.check-box');
   const text = el.querySelector('.check-text');
   box.classList.toggle('checked');
   text.classList.toggle('done');
+  saveChecklist();
 }
 
+function saveChecklist() {
+  const items = [...document.querySelectorAll('.check-item')];
+  const states = items.map(i => i.querySelector('.check-box').classList.contains('checked'));
+  try {
+    localStorage.setItem('oasis-checklist-salida', JSON.stringify(states));
+  } catch (e) {
+    // Silencioso: algunos navegadores en modo privado bloquean localStorage
+  }
+}
+
+function loadChecklist() {
+  let saved = null;
+  try {
+    saved = JSON.parse(localStorage.getItem('oasis-checklist-salida') || 'null');
+  } catch (e) {}
+  if (!Array.isArray(saved)) return;
+
+  const items = [...document.querySelectorAll('.check-item')];
+  items.forEach((item, i) => {
+    if (saved[i]) {
+      item.querySelector('.check-box').classList.add('checked');
+      item.querySelector('.check-text').classList.add('done');
+    }
+  });
+}
+
+/* Al cargar la página, restaurar el checklist */
+document.addEventListener('DOMContentLoaded', loadChecklist);
+
+/* ============================================
+   Copiar WiFi
+   ============================================ */
 function copyWifi() {
   const pass = document.getElementById('wifiPass').textContent;
   navigator.clipboard.writeText(pass).then(() => {
