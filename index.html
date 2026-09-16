@@ -139,11 +139,11 @@ body {
   position: absolute; background: transparent; border: none;
   cursor: pointer; border-radius: 12px; padding: 0;
   transition: background 0.2s ease;
-  text-indent: -9999px;   /* NUEVO: evita que el aria-label aparezca como texto */
-  overflow: hidden;        /* NUEVO */
-  font-size: 0;            /* NUEVO */
-  color: transparent;      /* NUEVO */
-  white-space: nowrap;     /* NUEVO */
+  text-indent: -9999px;
+  overflow: hidden;
+  font-size: 0;
+  color: transparent;
+  white-space: nowrap;
 }
 .menu-hotspot:hover { background: rgba(45,74,62,0.07); }
 
@@ -251,9 +251,7 @@ body {
 }
 .farewell .btn-call:hover { background: var(--secondary-light); }
 
-/* ============================================
-   Botón flotante de WhatsApp
-   ============================================ */
+/* Botón flotante de WhatsApp */
 .float-wa {
   position: fixed;
   bottom: 90px;
@@ -289,9 +287,7 @@ body {
 /* Scrollbar */
 ::-webkit-scrollbar { width: 0; }
 
-/* ============================================
-   Mapa embebido (My Maps personalizado)
-   ============================================ */
+/* Mapa embebido */
 .map-wrap {
   border-radius: 16px;
   overflow: hidden;
@@ -531,7 +527,7 @@ body {
       </div>
     </div>
 
-    <!-- ============ MAPA AL FINAL ============ -->
+    <!-- MAPA AL FINAL -->
     <h3 class="map-title serif"><i class="fas fa-map-marked-alt"></i> Mapa del callejón</h3>
     <div class="map-wrap">
       <iframe
@@ -556,7 +552,6 @@ body {
         <i class="fab fa-whatsapp"></i> Compartir
       </a>
     </div>
-    <!-- ============ FIN MAPA ============ -->
   </div>
 
   <!-- WI-FI Y CONFORT -->
@@ -656,7 +651,7 @@ body {
       </ul>
     </div>
     <div class="card">
-      <h3><i class="fas fa-leaf"></i> Cuida el Oasis</h3>
+      <h3><i class="fas fa-leaf"></i> Cuida el Oasis</contacth3>
       <p>Apaga <strong>luces y ventiladores</strong> cuando no los estés usando para cuidar el medio ambiente.</p>
     </div>
   </div>
@@ -683,7 +678,7 @@ body {
       </div>
       <div class="check-item" onclick="toggleCheck(this)">
         <div class="check-box"><i class="fas fa-check"></i></div>
-        <div class="check-text">Saca la basura y deposítala en los contenedores grandes (camioneta, caja de carga)</div>
+        <div class="check-text">Saca la basura y deposítala en los contenedores grandes frente a la puerta principal</div>
       </div>
       <div class="check-item" onclick="toggleCheck(this)">
         <div class="check-box"><i class="fas fa-check"></i></div>
@@ -736,7 +731,7 @@ body {
       </div>
       <span class="action">Llamar <i class="fas fa-phone"></i></span>
     </a>
-    <a href="tel:+527353536073" class="contact-btn">
+    <a href="tel:+527353536073" class="-btn">
       <i class="fas fa-user-md"></i>
       <div>
         <div class="name">Centro Médico del Ángel</div>
@@ -801,6 +796,20 @@ body {
 
     <div class="card">
       <h3><i class="fas fa-store"></i> Otras recomendaciones</h3>
+      
+      <div style="margin-bottom:12px;">
+        <strong style="color:var(--primary);">Palmira Mariscos</strong>
+        <p style="font-size:0.85rem;">Miguel Hidalgo, 62748 Cuautla, Mor.</p>
+        <a href="tel:+527356882956" style="color:var(--accent); font-size:0.85rem; text-decoration:none; display:block; margin-bottom:6px;"><i class="fas fa-phone"></i> +52 735 688 2956</a>
+        <a href="https://maps.app.goo.gl/panjeqkwHVVbrYa6A" target="_blank" style="color:var(--accent); font-size:0.85rem; text-decoration:none;"><i class="fas fa-map-marker-alt"></i> Ver en Google Maps</a>
+      </div>
+
+      <div style="margin-bottom:12px;">
+        <strong style="color:var(--primary);">Milá, Mercado & Bistro</strong>
+        <p style="font-size:0.85rem;">Francisco I. Madero 393, Emiliano Zapata, 62744 Cuautla, Mor.</p>
+        <a href="tel:+527351532935" style="color:var(--accent); font-size:0.85rem; text-decoration:none;"><i class="fas fa-phone"></i> +52 735 153 2935</a>
+      </div>
+
       <div style="margin-bottom:12px;">
         <strong style="color:var(--primary);">Birrierías Pomposo</strong>
         <p style="font-size:0.85rem;">México 160, Centro, Cocoyoc</p>
@@ -814,7 +823,7 @@ body {
       <div style="margin-bottom:12px;">
         <strong style="color:var(--primary);">El Arrocero</strong>
         <p style="font-size:0.85rem;">Cuautla</p>
-        <a href="tel:+527ajo353986992" style=" delcolor:var(--accent); font-size:0. mapa85rem; text-decoration:none;"><i class que="fas fa-phone"></i> +52 735 398 6992</a>
+        <a href="tel:+527353986992" style="color:var(--accent); font-size:0.85rem; text-decoration:none;"><i class="fas fa-phone"></i> +52 735 398 6992</a>
       </div>
       <div>
         <strong style="color:var(--primary);">Six Flags Hurricane Harbor Oaxtepec</strong>
@@ -917,9 +926,7 @@ function showSection(id) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* ============================================
-   CHECKLIST CON PERSISTENCIA (localStorage)
-   ============================================ */
+/* CHECKLIST CON PERSISTENCIA (localStorage) */
 function toggleCheck(el) {
   const box = el.querySelector('.check-box');
   const text = el.querySelector('.check-text');
@@ -954,9 +961,7 @@ function loadChecklist() {
 
 document.addEventListener('DOMContentLoaded', loadChecklist);
 
-/* ============================================
-   Copiar WiFi
-   ============================================ */
+/* Copiar WiFi */
 function copyWifi() {
   const pass = document.getElementById('wifiPass').textContent;
   navigator.clipboard.writeText(pass).then(() => {
